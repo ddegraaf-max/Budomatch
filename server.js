@@ -51,7 +51,7 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), (req,
   res.json({ received: true });
 });
 
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({ limit: '20mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ----- 41 specialisaties -----
@@ -128,6 +128,12 @@ app.get('/api/me', (req, res) => {
 });
 
 // ---------------- customer: requests (gratis) ----------------
+function cleanPhotos(arr) {
+  if (!Array.isArray(arr)) return [];
+  return arr.filter(d => typeof d === 'string'
+    && /^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(d)
+    && d.length < 3500000).slice(0, 3);
+}
 app.post('/api/requests', requireRole('customer'), (req, res) => {
   const b = req.body || {};
   if (!b.service || !b.description) return res.status(400).json({ error: 'invalid' });
@@ -140,6 +146,7 @@ app.post('/api/requests', requireRole('customer'), (req, res) => {
     phone: String(b.phone || '').slice(0, 40),
     email: req.user.email,
     lang: b.lang === 'pl' ? 'pl' : 'nl',
+    photos: cleanPhotos(b.photos),
   });
   res.json({ request: r });
 });
@@ -157,9 +164,10 @@ function leadView(r, pro) {
   const base = {
     id: r.id, service: r.service, zip: r.zip, description: r.description,
     createdAt: r.createdAt, lang: r.lang, claimed,
+    photoCount: Array.isArray(r.photos) ? r.photos.length : 0,
     matchesSpec: pro.spec && r.service && r.service.toLowerCase().includes(pro.spec.toLowerCase().split(' ')[0]),
   };
-  if (claimed) { base.name = r.name; base.phone = r.phone; base.email = r.email; }
+  if (claimed) { base.name = r.name; base.phone = r.phone; base.email = r.email; base.photos = r.photos || []; }
   return base;
 }
 
@@ -301,20 +309,33 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // ---------------- e-mail (Resend) voor gast-aanvragen / aanmeldingen ----------------
-async function sendMail(subject, html) {
-  if (!process.env.RESEND_API_KEY) { console.log('[Resend niet ingesteld]', subject); return { skipped: true }; }
+async function sendMail(subject, html, attachments) {
+  if (!process.env.RESEND_API_KEY) { console.log('[Resend niet ingesteld]', subject, attachments ? `(+${attachments.length} bijlage(n))` : ''); return { skipped: true }; }
+  const payload = { from: process.env.MAIL_FROM || 'Budomatch <onboarding@resend.dev>', to: process.env.MAIL_TO || 'info@budomatch.pl', subject, html };
+  if (attachments && attachments.length) payload.attachments = attachments;
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'content-type': 'application/json' },
-    body: JSON.stringify({ from: process.env.MAIL_FROM || 'Budomatch <onboarding@resend.dev>', to: process.env.MAIL_TO || 'kontakt@budomatch.pl', subject, html }),
+    body: JSON.stringify(payload),
   });
   if (!r.ok) throw new Error('Resend ' + r.status);
   return r.json();
 }
+function photoAttachments(photos) {
+  if (!Array.isArray(photos)) return [];
+  const ext = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif' };
+  return photos.slice(0, 3).map((d, i) => {
+    const m = typeof d === 'string' && d.match(/^data:(image\/(?:jpeg|png|webp|gif));base64,([A-Za-z0-9+/=]+)$/);
+    if (!m) return null;
+    return { filename: `foto${i + 1}.${ext[m[1]] || 'jpg'}`, content: m[2] };
+  }).filter(Boolean);
+}
 app.post('/api/quote', async (req, res) => {
   try { const b = req.body || {};
+    const atts = photoAttachments(b.photos);
     await sendMail(`Offerteaanvraag (gast) — ${esc(b.service) || '-'}`,
-      `<h2>Offerteaanvraag</h2><p><b>Dienst:</b> ${esc(b.service)}</p><p><b>Plaats:</b> ${esc(b.zip)}</p><p><b>Omschrijving:</b><br>${esc(b.description)}</p><p><b>Naam:</b> ${esc(b.name)}</p><p><b>Tel:</b> ${esc(b.phone)}</p><p><b>E-mail:</b> ${esc(b.email)}</p>`);
+      `<h2>Offerteaanvraag</h2><p><b>Dienst:</b> ${esc(b.service)}</p><p><b>Plaats:</b> ${esc(b.zip)}</p><p><b>Omschrijving:</b><br>${esc(b.description)}</p><p><b>Naam:</b> ${esc(b.name)}</p><p><b>Tel:</b> ${esc(b.phone)}</p><p><b>E-mail:</b> ${esc(b.email)}</p><p><b>Foto's:</b> ${atts.length}</p>`,
+      atts);
     res.json({ ok: true }); } catch (e) { console.error(e); res.status(500).json({ ok: false }); }
 });
 app.post('/api/pro', async (req, res) => {
