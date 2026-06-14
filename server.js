@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 const MODEL = process.env.MODEL || 'claude-sonnet-4-6';
 
 // ----- Pricing -----
-const FREE_LEADS = 10;
+const FREE_LEADS = 5;
 const LEAD_PRICE_GROSS = 50;            // zł incl. btw
 const VAT_RATE = 0.23;                   // 23%
 const LEAD_PRICE_NET = +(LEAD_PRICE_GROSS / (1 + VAT_RATE)).toFixed(2);   // 40.65

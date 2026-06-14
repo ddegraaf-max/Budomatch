@@ -1,7 +1,7 @@
 # Budomatch
 
 Tweetalige (NL/PL) marktplaats die bewoners in Polen koppelt aan betrouwbare vakmensen.
-E�n Node/Express-app: de site, accounts voor klanten en professionals, een leadmodel met
+E©n Node/Express-app: de site, accounts voor klanten en professionals, een leadmodel met
 facturatie-logica, en een AI-assistent.
 
 ## Structuur
@@ -33,7 +33,7 @@ worden gelogd i.p.v. gemaild. Accounts/leads werken altijd.
 ## Hoe het werkt
 - **Klanten** maken gratis een account aan en plaatsen **gratis** een aanvraag.
 - **Professionals** zien aanvragen; contactgegevens zijn afgeschermd tot ze een lead
-  **ontgrendelen**. Eerste **10 gratis**; daarna **50 zł incl. 23% btw** (40,65 excl. + 9,35 btw).
+  **ontgrendelen**. Eerste **5 gratis**; daarna **50 zł incl. 23% btw** (40,65 excl. + 9,35 btw).
 - De **AI-assistent** helpt klanten hun klus scherp te omschrijven.
 
 ## Endpoints
