@@ -1,0 +1,16 @@
+{
+  "name": "budomatch",
+  "version": "1.0.0",
+  "description": "Budomatch — marktplaats voor vakmensen in Polen, met accounts, Stripe-betalingen en AI-assistent.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "stripe": "^17.7.0"
+  }
+}
