@@ -128,6 +128,17 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rg
 .pride .accent{display:inline-block;width:90px;height:5px;border-radius:5px;margin-bottom:26px;background:linear-gradient(90deg,#fff 0 50%,var(--red) 50% 100%)}
 .pride h2{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.1;max-width:880px;margin:0 auto 18px}
 .pride p{color:var(--muted);font-size:1.15rem;max-width:640px;margin:0 auto}
+.cat .ico svg{width:24px;height:24px;color:var(--gold-bright)}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.tcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px}
+.tcard .tico{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;margin-bottom:16px;background:linear-gradient(150deg,rgba(227,193,88,.18),rgba(201,162,39,.06));border:1px solid var(--line)}
+.tcard .tico svg{width:26px;height:26px;color:var(--gold-bright)}
+.tcard h3{font-family:'Marcellus';font-size:1.22rem;margin-bottom:8px}
+.tcard p{color:var(--muted);font-size:.94rem}
+.pl-flag{width:66px;height:42px;border-radius:6px;margin:0 auto 22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 26px rgba(0,0,0,.45)}
+.pl-flag i{display:block;height:50%}
+.pl-flag .w{background:#fff}.pl-flag .r{background:var(--red)}
+@media(max-width:760px){.trust{grid-template-columns:1fr}}
 
 .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .review{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:30px}
@@ -269,8 +280,8 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:64px 0 30px
         <a href="#offerte" class="btn btn-gold cta" data-i18n="navQuote"></a>
       </nav>
       <div class="lang">
-        <button id="lnNL" class="on" onclick="setLang('nl')">NL</button>
-        <button id="lnPL" onclick="setLang('pl')">PL</button>
+        <button id="lnPL" class="on" onclick="setLang('pl')">PL</button>
+        <button id="lnEN" onclick="setLang('en')">EN</button>
       </div>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
@@ -307,6 +318,30 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:64px 0 30px
      <img src="https://images.unsplash.com/photo-1672627170267-fca17bb54156?auto=format&fit=crop&w=900&q=70" alt="" loading="lazy" onerror="this.style.display='none'">
      <div class="badge"><b>4,8/5</b><span data-i18n="statRating"></span></div>
    </div>
+  </div>
+</section>
+
+<section class="pad trust-sec">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow"><span class="dash"></span><span data-i18n="trustEb"></span></span>
+      <h2 data-i18n="trustH"></h2>
+      <p data-i18n="trustP"></p>
+    </div>
+    <div class="trust">
+      <div class="tcard rv">
+        <div class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/><path d="M9 15l2 2 4-4"/></svg></div>
+        <h3 data-i18n="t1t"></h3><p data-i18n="t1p"></p>
+      </div>
+      <div class="tcard rv">
+        <div class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3L6 21z"/><path d="M9 8h6M9 12h4"/></svg></div>
+        <h3 data-i18n="t2t"></h3><p data-i18n="t2p"></p>
+      </div>
+      <div class="tcard rv">
+        <div class="tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 13.5 7 21l5-2.8L17 21l-1.5-7.5"/><path d="M9.3 9l1.8 1.8L15 7"/></svg></div>
+        <h3 data-i18n="t3t"></h3><p data-i18n="t3p"></p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -388,6 +423,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:64px 0 30px
 
 <section class="pride">
   <div class="wrap rv">
+    <div class="pl-flag" aria-hidden="true"><i class="w"></i><i class="r"></i></div>
     <span class="accent"></span>
     <h2 data-i18n="prideH"></h2>
     <p data-i18n="prideP"></p>
@@ -521,103 +557,108 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:64px 0 30px
 <script>
 /* ---------------- categories: [nl, pl, icon, groupKey] ---------------- */
 const CATS=[
-["Aanbouw","Dobudówka","🏗️","reno"],["Airco","Klimatyzacja","❄️","energy"],
-["Architect","Architekt","📐","design"],["Asbest verwijderen","Usuwanie azbestu","☣️","protect"],
-["Badkamerspecialist","Łazienki","🛁","reno"],["Bestraten","Brukarstwo","🧱","garden"],
-["Cv-ketel","Piec / kocioł CO","🔥","energy"],["Dakbedekking","Pokrycia dachowe","🏠","roof"],
-["Dakkapel","Lukarna","🪟","roof"],["Dakraam","Okno dachowe","🪟","roof"],
-["Elektricien","Elektryk","⚡","install"],["Garagedeur","Bramy garażowe","🚪","mount"],
-["Gevelreiniging","Czyszczenie elewacji","🧽","facade"],["Glas","Szklenie","🪟","mount"],
-["Hekwerken","Ogrodzenia","🚧","garden"],["Inbraakbeveiliging","Zabezpieczenia antywłamaniowe","🔒","install"],
-["Isolatie","Izolacja","🧊","energy"],["Keukenspecialist","Kuchnie","🍽️","reno"],
-["Kozijnen","Stolarka okienna","🪟","mount"],["Laadpalen","Stacje ładowania","🔌","energy"],
-["Loodgieter","Hydraulik","🚰","install"],["Ongediertebestrijding","Dezynsekcja","🐜","protect"],
-["Rolluiken","Rolety","🪟","mount"],["Schilderwerk","Malowanie","🎨","finish"],
-["Schuifpui","Drzwi przesuwne HS","🚪","mount"],["Serre","Ogród zimowy","🌿","extend"],
-["Stucwerk","Tynkowanie","🧱","finish"],["Tegels zetten","Układanie płytek","🟫","finish"],
-["Thuisbatterij","Magazyn energii","🔋","energy"],["Trap","Schody","🪜","finish"],
-["Tuinaanleg","Zakładanie ogrodów","🌳","garden"],["Tuinonderhoud","Pielęgnacja ogrodów","✂️","garden"],
-["Ventilatie","Wentylacja","💨","install"],["Verbouwing","Remont","🔨","reno"],
-["Vloeren","Podłogi","🪵","finish"],["Vloerverwarming","Ogrzewanie podłogowe","♨️","energy"],
-["Vochtbestrijding","Osuszanie / wilgoć","💧","protect"],["Warmtepomp","Pompa ciepła","♻️","energy"],
-["Wellness","Wellness / sauny","🧖","interior"],["Zonnepanelen","Fotowoltaika","☀️","energy"],
-["Zonwering","Markizy / osłony","⛱️","mount"]
+["Extension","Dobudówka","extension","extend"],["Air conditioning","Klimatyzacja","climate","energy"],
+["Architect","Architekt","ruler","design"],["Asbestos removal","Usuwanie azbestu","hazard","protect"],
+["Bathroom","Łazienki","bath","reno"],["Paving","Brukarstwo","paving","garden"],
+["Boiler (CH)","Piec / kocioł CO","boiler","energy"],["Roofing","Pokrycia dachowe","roof","roof"],
+["Dormer","Lukarna","dormer","roof"],["Roof window","Okno dachowe","skylight","roof"],
+["Electrician","Elektryk","bolt","install"],["Garage door","Bramy garażowe","garage","mount"],
+["Facade cleaning","Czyszczenie elewacji","facade","facade"],["Glazing","Szklenie","glass","mount"],
+["Fencing","Ogrodzenia","fence","garden"],["Burglary protection","Zabezpieczenia antywłamaniowe","shield","install"],
+["Insulation","Izolacja","insulation","energy"],["Kitchen","Kuchnie","kitchen","reno"],
+["Window frames","Stolarka okienna","window","mount"],["EV charging","Stacje ładowania","evplug","energy"],
+["Plumber","Hydraulik","pipe","install"],["Pest control","Dezynsekcja","pest","protect"],
+["Roller shutters","Rolety","shutter","mount"],["Painting","Malowanie","paint","finish"],
+["Sliding doors","Drzwi przesuwne HS","slidingdoor","mount"],["Conservatory","Ogród zimowy","conservatory","extend"],
+["Plastering","Tynkowanie","trowel","finish"],["Tiling","Układanie płytek","tiles","finish"],
+["Home battery","Magazyn energii","battery","energy"],["Stairs","Schody","stairs","finish"],
+["Landscaping","Zakładanie ogrodów","tree","garden"],["Garden maintenance","Pielęgnacja ogrodów","shears","garden"],
+["Ventilation","Wentylacja","vent","install"],["Renovation","Remont","hammer","reno"],
+["Flooring","Podłogi","floor","finish"],["Underfloor heating","Ogrzewanie podłogowe","heatfloor","energy"],
+["Damp proofing","Osuszanie / wilgoć","drop","protect"],["Heat pump","Pompa ciepła","heatpump","energy"],
+["Wellness & sauna","Wellness / sauny","sauna","interior"],["Solar panels","Fotowoltaika","solar","energy"],
+["Awnings & sun protection","Markizy / osłony","awning","mount"]
 ];
 
 const GROUPS={
-  reno:["Renovatie","Remont"],energy:["Energie","Energia"],design:["Ontwerp","Projekt"],
-  protect:["Bescherming","Ochrona"],garden:["Tuin","Ogród"],roof:["Dak","Dach"],
-  install:["Installaties","Instalacje"],mount:["Montage","Montaż"],facade:["Gevel","Elewacja"],
-  finish:["Afwerking","Wykończenia"],extend:["Aanbouw","Dobudowa"],interior:["Interieur","Wnętrze"]
+  reno:["Renovation","Remont"],energy:["Energy","Energia"],design:["Design","Projekt"],
+  protect:["Protection","Ochrona"],garden:["Garden","Ogród"],roof:["Roof","Dach"],
+  install:["Installations","Instalacje"],mount:["Fitting","Montaż"],facade:["Facade","Elewacja"],
+  finish:["Finishing","Wykończenia"],extend:["Extension","Dobudowa"],interior:["Interior","Wnętrze"]
 };
 
 /* ---------------- translations ---------------- */
 const T={
- nl:{
-  strip:"🇵🇱 Trots op Pools vakmanschap — wij steunen lokale vakmensen in heel Polen",
-  navServices:"Diensten",navHow:"Hoe het werkt",navPros:"Voor vakmensen",navReviews:"Reviews",navQuote:"Offerte aanvragen",
-  eyebrowHero:"Vakmensen-marktplaats · Polen",
-  h1:"Jouw huis.<br>Poolse <em>vakmensen</em>.<br>Eén plek.",
-  lead:"Budomatch verbindt je met betrouwbare specialisten bij jou in de buurt. Beschrijf je klus, vergelijk offertes en kies de beste — <strong>gratis en vrijblijvend</strong>.",
-  cityPh:"Jouw stad (bijv. Warschau)",btnSearch:"Vakman zoeken",
-  statPros:"gecontroleerde vakmensen",statSpec:"specialisaties",statRating:"gemiddelde score",statFree:"gratis voor klanten",
-  ebServices:"Onze diensten",h2Services:"41 bouwspecialisaties",
-  pServices:"Van verbouwing tot zonnepanelen — vind de juiste vakman voor elke klus in huis en tuin.",
-  catPh:"Zoek een dienst… (bijv. dak, elektricien, tuin)",
-  ebHow:"Eenvoudig en snel",h2How:"Hoe het werkt",pHow:"Drie stappen scheiden je van de start van je project met de juiste vakman.",
-  s1t:"Beschrijf je klus",s1p:"Vertel ons wat je nodig hebt en waar. Het formulier invullen duurt minder dan een minuut.",
-  s2t:"Ontvang offertes",s2p:"Passende vakmensen bij jou in de buurt sturen vrijblijvende offertes — meestal binnen 24 uur.",
-  s3t:"Kies de beste",s3p:"Vergelijk prijzen, reviews en certificaten. Jij kiest wie je je huis toevertrouwt. Geen verborgen kosten.",
-  ebPro:"Voor vakmensen",h2Pro:"Laat je bedrijf groeien met Budomatch",
-  pPro:"Sluit je aan bij duizenden Poolse bouwbedrijven en ontvang klussen van klanten bij jou in de buurt — precies wanneer ze ernaar op zoek zijn.",
-  proB1:"Klussen afgestemd op je specialisatie en regio",
-  proB2:"Je betaalt alleen voor leads die je echt interesseren",
-  proB3:"Bouw je reputatie op met reviews van tevreden klanten",
-  proB4:"Bedrijfsprofiel en certificaten zichtbaar in heel Polen",
-  proTitle:"Maak een vakman-profiel aan",proSub:"Gratis registratie — je eerste leads nog deze week.",
-  lblCompany:"Bedrijfsnaam",phCompany:"bijv. Kowalski Bouw",lblSpec:"Specialisatie",
-  lblCity:"Stad / provincie",phCity:"bijv. Krakau, Małopolska",lblEmail:"E-mail",phEmail:"contact@bedrijf.pl",
-  proBtn:"Aanmelden bij Budomatch",proNote:"Bedankt! We nemen snel contact met je op om je profiel te activeren. 🤝",
-  prideH:"„Goed werk kent zijn land.”",
-  prideP:"Budomatch is ontstaan uit respect voor Pools vakmanschap. We verbinden lokale specialisten met bewoners in heel Polen — want het beste werk leveren zij die hun regio kennen en trots zijn op wat ze bouwen.",
-  ebReviews:"Klantbeoordelingen",h2Reviews:"Duizenden Polen vertrouwen op ons",
-  r1:"„Drie offertes voor mijn badkamerrenovatie op één dag. Ik koos een ploeg uit Wrocław — degelijk en op tijd. Aanrader!”",r1m:"Wrocław · Badkamer",
-  r2:"„Ik zocht een elektricien voor mijn appartement. Via Budomatch vond ik binnen een uur een vakman uit de buurt. Concreet.”",r2m:"Gdańsk · Elektricien",
-  r3:"„Zonnepanelen op het dak van ons huis bij Poznań. Offertes vergeleken, prijzen helder, geen gedoe. Zo hoort het.”",r3m:"Poznań · Zonnepanelen",
-  ebQuote:"Gratis en vrijblijvend",h2Quote:"Vraag een offerte aan",
-  pQuote:"Beschrijf je project — passende vakmensen bij jou in de buurt nemen contact op met een offerte.",
-  qLblService:"Welke dienst zoek je?",qLblZip:"Postcode / stad",qPhZip:"bijv. 00-001 Warschau",
-  qLblDesc:"Beschrijf je klus",qPhDesc:"Bijv. Badkamerrenovatie 6 m², tegels en kraanwerk vervangen, start over 2 weken…",
-  qLblName:"Naam",qPhName:"Jan Kowalski",qLblPhone:"Telefoon",qPhPhone:"+48 600 000 000",
-  qLblEmail:"E-mail",qPhEmail:"jan@voorbeeld.pl",qBtn:"Versturen en offertes ontvangen",
-  qNote:"Bedankt! Je aanvraag is verstuurd. Vakmensen bij jou in de buurt nemen snel contact op. 🛠️",
-  footBlurb:"Marktplaats die bewoners in Polen verbindt met betrouwbare vakmensen. Trots op Pools vakmanschap. 🇵🇱",
-  footCol1:"Diensten",footL1a:"Alle categorieën",footL1b:"Renovatie & afwerking",footL1c:"Dak & gevel",footL1d:"Energie & installaties",
-  footCol3:"Contact",footHours:"Ma–Vr 9:00–17:00",footTerms:"Algemene voorwaarden",footPrivacy:"Privacyverklaring",
-  footRights:"Alle rechten voorbehouden",footPart:"Onderdeel van Creditline B.V.",
-  navLogin:"Inloggen",navDashboard:"Dashboard",navLogout:"Uitloggen",
-  authLoginTitle:"Welkom terug",authRegTitle:"Account aanmaken",
-  authLoginSub:"Log in op je Budomatch-account.",authRegSub:"Maak gratis een account aan.",
-  authEmail:"E-mail",authPass:"Wachtwoord",authName:"Naam",
-  authRoleCustomer:"Ik ben klant",authRolePro:"Ik ben vakman",
-  authCompany:"Bedrijfsnaam",authSpec:"Specialisatie",authCity:"Stad / provincie",authNip:"NIP (optioneel)",authAddr:"Adres (voor factuur, optioneel)",
-  authSubmitLogin:"Inloggen",authSubmitReg:"Account aanmaken",
-  authToReg:"Nog geen account? Registreren",authToLogin:"Al een account? Inloggen",
-  authErr:"Onjuiste gegevens, of dit e-mailadres bestaat al.",
-  ebProjects:"Populair",h2Projects:"Projecten op Budomatch",pProjects:"Een greep uit klussen die via Budomatch worden uitgevoerd.",
-  proj1:"Verbouwing & aanbouw",proj2:"Vakmanschap op locatie",proj3:"Ruwbouw & constructie",proj4:"Zonnepanelen",
-  chatTitle:"Budomatch-assistent",chatSub:"Altijd hier om te helpen",chatPh:"Stel je vraag…",
-  chatGreeting:"Hoi! Ik ben de assistent van Budomatch. Ik help je het juiste vakgebied te kiezen, je klus te beschrijven of een offerte aan te vragen. Waarmee kan ik je helpen?",
-  chip1:"Welke vakman heb ik nodig?",chip2:"Help me mijn klus beschrijven",chip3:"Hoe werkt Budomatch?",
-  chatError:"Sorry, er ging iets mis. Probeer het zo nog eens.",
-  selPh:"Kies een dienst…",specPh:"Kies een specialisatie…"
+ en:{
+  strip:"🇵🇱 Proud of Polish craftsmanship — supporting local tradesmen across Poland",
+  navServices:"Services",navHow:"How it works",navPros:"For tradesmen",navReviews:"Reviews",navQuote:"Request a quote",
+  eyebrowHero:"Tradesmen marketplace · Poland",
+  h1:"Your home.<br>Polish <em>tradesmen</em>.<br>One place.",
+  lead:"Budomatch connects you with reliable specialists near you who keep their appointments. Describe your job, compare quotes and pick the best — <strong>free and without obligation</strong>.",
+  cityPh:"Your city (e.g. Warsaw)",btnSearch:"Find a tradesman",
+  statPros:"verified tradesmen",statSpec:"specialisations",statRating:"average rating",statFree:"free for customers",
+  ebServices:"Our services",h2Services:"41 building specialisations",
+  pServices:"From renovation to solar panels — find the right professional for every job in and around your home.",
+  catPh:"Search a service… (e.g. roof, electrician, garden)",
+  ebHow:"Simple and fast",h2How:"How it works",pHow:"Three steps stand between you and the start of your project with the right tradesman.",
+  s1t:"Describe your job",s1p:"Tell us what you need and where. Filling in the form takes less than a minute.",
+  s2t:"Receive quotes",s2p:"Matching tradesmen near you send no-obligation quotes — usually within 24 hours.",
+  s3t:"Choose the best",s3p:"Compare prices, reviews and certificates. You decide who to trust with your home. No hidden costs.",
+  ebPro:"For tradesmen",h2Pro:"Grow your business with Budomatch",
+  pPro:"Join thousands of Polish construction companies and receive jobs from customers near you — exactly when they are looking.",
+  proB1:"Jobs matched to your specialisation and region",
+  proB2:"You only pay for leads that genuinely interest you",
+  proB3:"Build your reputation with reviews from happy customers",
+  proB4:"Company profile and certificates visible across Poland",
+  proTitle:"Create a tradesman profile",proSub:"Free registration — your first leads this week.",
+  lblCompany:"Company name",phCompany:"e.g. Kowalski Construction",lblSpec:"Specialisation",
+  lblCity:"City / region",phCity:"e.g. Kraków, Lesser Poland",lblEmail:"E-mail",phEmail:"contact@company.pl",
+  proBtn:"Join Budomatch",proNote:"Thank you! We will contact you shortly to activate your profile. 🤝",
+  prideH:"Proud of Polish craftsmanship",
+  prideP:"Budomatch was born from respect for Polish craftsmanship. We connect local specialists with residents across Poland — because the best work is done by those who know their region and take pride in what they build.",
+  ebReviews:"Customer reviews",h2Reviews:"Trusted by thousands of Poles",
+  r1:"“Three quotes for my bathroom renovation in one day. I chose a crew from Wrocław — solid and on time. Recommended!”",r1m:"Wrocław · Bathroom",
+  r2:"“I needed an electrician for my flat. Through Budomatch I found a local pro within an hour. To the point.”",r2m:"Gdańsk · Electrician",
+  r3:"“Solar panels on our house near Poznań. Compared offers, clear prices, no hassle. That is how it should be.”",r3m:"Poznań · Solar panels",
+  ebQuote:"Free and without obligation",h2Quote:"Request a quote",
+  pQuote:"Describe your project — matching tradesmen near you will get in touch with a quote.",
+  qLblService:"Which service do you need?",qLblZip:"Postcode / city",qPhZip:"e.g. 00-001 Warsaw",
+  qLblDesc:"Describe your job",qPhDesc:"E.g. Bathroom renovation 6 m², replace tiles and taps, start in 2 weeks…",
+  qLblName:"Name",qPhName:"Jan Kowalski",qLblPhone:"Phone",qPhPhone:"+48 600 000 000",
+  qLblEmail:"E-mail",qPhEmail:"jan@example.pl",qBtn:"Send and receive quotes",
+  qNote:"Thank you! Your request has been sent. Tradesmen near you will be in touch soon. 🛠️",
+  footBlurb:"Marketplace connecting residents in Poland with reliable tradesmen. Proud of Polish craftsmanship. 🇵🇱",
+  footCol1:"Services",footL1a:"All categories",footL1b:"Renovation & finishing",footL1c:"Roof & facade",footL1d:"Energy & installations",
+  footCol3:"Contact",footHours:"Mon–Fri 9:00–17:00",footTerms:"Terms & conditions",footPrivacy:"Privacy policy",
+  footRights:"All rights reserved",footPart:"Proudly supporting Polish craftsmanship",
+  navLogin:"Log in",navDashboard:"Dashboard",navLogout:"Log out",
+  authLoginTitle:"Welcome back",authRegTitle:"Create account",
+  authLoginSub:"Log in to your Budomatch account.",authRegSub:"Create a free account.",
+  authEmail:"E-mail",authPass:"Password",authName:"Name",
+  authRoleCustomer:"I am a customer",authRolePro:"I am a tradesman",
+  authCompany:"Company name",authSpec:"Specialisation",authCity:"City / region",authNip:"NIP (optional)",authAddr:"Address (for invoice, optional)",
+  authSubmitLogin:"Log in",authSubmitReg:"Create account",
+  authToReg:"No account yet? Register",authToLogin:"Already have an account? Log in",
+  authErr:"Incorrect details, or this e-mail already exists.",
+  ebProjects:"Popular",h2Projects:"Projects on Budomatch",pProjects:"A selection of jobs carried out through Budomatch.",
+  proj1:"Renovation & extension",proj2:"Craftsmanship on site",proj3:"Shell & structure",proj4:"Solar panels",
+  chatTitle:"Budomatch assistant",chatSub:"Always here to help",chatPh:"Ask your question…",
+  chatGreeting:"Hi! I am the Budomatch assistant. I can help you pick the right trade, describe your job or request a quote. How can I help?",
+  chip1:"Which tradesman do I need?",chip2:"Help me describe my job",chip3:"How does Budomatch work?",
+  chatError:"Sorry, something went wrong. Please try again.",
+  selPh:"Choose a service…",specPh:"Choose a specialisation…",
+  trustEb:"Why Budomatch",trustH:"Reliable tradesmen, Polish standards",
+  trustP:"Professionals who keep their word and work by the rules — with invoice and guarantee.",
+  t1t:"Appointments kept",t1p:"Vetted professionals who show up on time and deliver what was agreed.",
+  t2t:"By Polish rules — with invoice",t2p:"Work compliant with Polish regulations and always a proper VAT invoice.",
+  t3t:"Guarantee",t3p:"Craftsmanship you can rely on, backed by a guarantee on the work delivered."
  },
  pl:{
   strip:"🇵🇱 Dumni z polskiego rzemiosła — wspieramy lokalnych fachowców w całej Polsce",
   navServices:"Usługi",navHow:"Jak to działa",navPros:"Dla fachowców",navReviews:"Opinie",navQuote:"Poproś o wycenę",
   eyebrowHero:"Marketplace fachowców · Polska",
   h1:"Twój dom.<br>Polscy <em>fachowcy</em>.<br>Jedno miejsce.",
-  lead:"Budomatch łączy Cię ze sprawdzonymi specjalistami w Twojej okolicy. Opisz zlecenie, porównaj wyceny i wybierz najlepszego — <strong>bezpłatnie i bez zobowiązań</strong>.",
+  lead:"Budomatch łączy Cię ze sprawdzonymi specjalistami w Twojej okolicy, którzy dotrzymują terminów. Opisz zlecenie, porównaj wyceny i wybierz najlepszego — <strong>bezpłatnie i bez zobowiązań</strong>.",
   cityPh:"Twoje miasto (np. Warszawa)",btnSearch:"Szukaj fachowca",
   statPros:"zweryfikowanych fachowców",statSpec:"specjalizacji",statRating:"średnia ocena",statFree:"za darmo dla klientów",
   ebServices:"Nasze usługi",h2Services:"41 specjalizacji budowlanych",
@@ -637,7 +678,7 @@ const T={
   lblCompany:"Nazwa firmy",phCompany:"np. Kowalski Budownictwo",lblSpec:"Specjalizacja",
   lblCity:"Miasto / województwo",phCity:"np. Kraków, małopolskie",lblEmail:"E-mail",phEmail:"kontakt@firma.pl",
   proBtn:"Dołącz do Budomatch",proNote:"Dziękujemy! Skontaktujemy się z Tobą wkrótce, aby aktywować profil. 🤝",
-  prideH:"„Dobra robota zna swój kraj.”",
+  prideH:"Dumni z polskiego rzemiosła",
   prideP:"Budomatch powstał z szacunku dla polskiego rzemiosła. Łączymy lokalnych specjalistów z mieszkańcami całej Polski — bo najlepszą robotę robią ci, którzy znają swój region i są dumni z tego, co budują.",
   ebReviews:"Opinie klientów",h2Reviews:"Zaufały nam tysiące Polaków",
   r1:"„Trzy wyceny na remont łazienki w jeden dzień. Wybrałam ekipę z Wrocławia — solidnie i terminowo. Polecam!”",r1m:"Wrocław · Łazienki",
@@ -653,7 +694,7 @@ const T={
   footBlurb:"Marketplace łączący mieszkańców Polski ze sprawdzonymi fachowcami. Dumni z polskiego rzemiosła. 🇵🇱",
   footCol1:"Usługi",footL1a:"Wszystkie kategorie",footL1b:"Remont i wykończenia",footL1c:"Dach i elewacja",footL1d:"Energia i instalacje",
   footCol3:"Kontakt",footHours:"Pon.–Pt. 9:00–17:00",footTerms:"Regulamin",footPrivacy:"Polityka prywatności",
-  footRights:"Wszelkie prawa zastrzeżone",footPart:"Część Creditline B.V.",
+  footRights:"Wszelkie prawa zastrzeżone",footPart:"Z dumą wspieramy polskie rzemiosło",
   navLogin:"Zaloguj",navDashboard:"Panel",navLogout:"Wyloguj",
   authLoginTitle:"Witaj ponownie",authRegTitle:"Utwórz konto",
   authLoginSub:"Zaloguj się do konta Budomatch.",authRegSub:"Załóż darmowe konto.",
@@ -669,21 +710,69 @@ const T={
   chatGreeting:"Cześć! Jestem asystentem Budomatch. Pomogę Ci wybrać właściwą specjalizację, opisać zlecenie lub poprosić o wycenę. W czym mogę pomóc?",
   chip1:"Jakiego fachowca potrzebuję?",chip2:"Pomóż mi opisać zlecenie",chip3:"Jak działa Budomatch?",
   chatError:"Przepraszamy, coś poszło nie tak. Spróbuj ponownie za chwilę.",
-  selPh:"Wybierz usługę…",specPh:"Wybierz specjalizację…"
+  selPh:"Wybierz usługę…",specPh:"Wybierz specjalizację…",
+  trustEb:"Dlaczego Budomatch",trustH:"Rzetelni fachowcy, polskie standardy",
+  trustP:"Fachowcy, którzy dotrzymują słowa i pracują zgodnie z przepisami — z fakturą i gwarancją.",
+  t1t:"Dotrzymane terminy",t1p:"Sprawdzeni fachowcy, którzy przychodzą na czas i robią to, co ustalono.",
+  t2t:"Zgodnie z przepisami — z fakturą",t2p:"Prace zgodne z polskimi przepisami i zawsze rzetelna faktura VAT.",
+  t3t:"Gwarancja",t3p:"Rzemiosło, na którym można polegać — z gwarancją na wykonaną pracę."
  }
 };
 
-let LANG=(document.cookie.match(/(?:^|; )bm_lang=(nl|pl)/)||[])[1]||'pl';
+let LANG=(document.cookie.match(/(?:^|; )bm_lang=(pl|en)/)||[])[1]||'pl';
 const grid=document.getElementById('catGrid');
 
-function catName(c){return LANG==='nl'?c[0]:c[1]}
-function groupName(g){return GROUPS[g]?GROUPS[g][LANG==='nl'?0:1]:g}
+const ICONS={
+extension:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l6-5 6 5v8H3z"/><path d="M15 19h6v-7h-6"/><path d="M18 12v-2"/></svg>',
+climate:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="8" rx="1.5"/><path d="M6 17h2M11 17h2M16 17h2"/></svg>',
+ruler:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16z"/><path d="M8 16h2M11 13h2M14 10h2"/></svg>',
+hazard:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 20h20z"/><path d="M12 10v4M12 17h.01"/></svg>',
+bath:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v3a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M6 12V7a2 2 0 0 1 2-2h1"/><path d="M6 21l-1-1M19 21l1-1"/></svg>',
+paving:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 12h18M9 5v7M15 12v7"/></svg>',
+boiler:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1 3 4 4 4 7a4 4 0 0 1-8 0c0-2 1-3 2-4 .5 1 1 1.5 2 1.5C12 6.5 11 5 12 3z"/></svg>',
+roof:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 12 4l9 8"/><path d="M5 11v8h14v-8"/></svg>',
+dormer:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13 12 5l9 8"/><path d="M5 12v7h14v-7"/><rect x="10" y="13" width="4" height="6"/></svg>',
+skylight:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14 12 6l8 8v6H4z"/><rect x="10.5" y="11" width="4.5" height="4.5"/></svg>',
+bolt:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 5 13h5l-1 8 9-11h-5z"/></svg>',
+garage:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 12 5l9 5v9H3z"/><path d="M6 19v-6h12v6"/><path d="M6 16h12"/></svg>',
+facade:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7h2M8 11h2M8 15h2M14 7h2M14 11h2M14 15h2"/></svg>',
+glass:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M7 6 17 16" opacity=".5"/></svg>',
+fence:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8v12M12 8v12M18 8v12"/><path d="M4 12h16M4 16h16"/></svg>',
+shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4 3 6.5 7 9 4-2.5 7-5 7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
+insulation:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8c3-2 6-2 9 0s6 2 9 0"/><path d="M3 13c3-2 6-2 9 0s6 2 9 0"/><path d="M3 18c3-2 6-2 9 0s6 2 9 0"/></svg>',
+kitchen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 12h16"/><circle cx="8" cy="8" r="1"/><path d="M14 7v3"/></svg>',
+window:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 3v18M4 12h16"/></svg>',
+evplug:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="12" height="9" rx="2"/><path d="M9 5V3M15 5V3M12 14v4M9 21h6"/></svg>',
+pipe:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9h5V7a3 3 0 0 1 6 0"/><path d="M7 9v4a3 3 0 0 0 3 3"/><rect x="4" y="7" width="3" height="4"/></svg>',
+pest:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="13" rx="4" ry="5"/><path d="M12 8V5M8 10 5 8M16 10l3-2M8 13H4M16 13h4M9 17l-2 2M15 17l2 2"/></svg>',
+shutter:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 8h16M4 12h16M4 16h16"/></svg>',
+paint:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="11" height="6" rx="1"/><path d="M15 7h3v4h-6"/><path d="M12 11v3a2 2 0 0 1-2 2H9v5"/></svg>',
+slidingdoor:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 3v18"/><path d="M9 12H6m0 0 2-2m-2 2 2 2M15 12h3m0 0-2-2m2 2-2 2"/></svg>',
+conservatory:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10l8-5 8 5v10"/><path d="M4 10h16M12 5v15"/></svg>',
+trowel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 10 20 4"/><path d="M4 14l6 6 7-7-6-6z"/></svg>',
+tiles:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>',
+battery:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 10v4"/><path d="M8 12h5M10.5 9.5v5" opacity=".7"/></svg>',
+stairs:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-3h4v-3h4v-3h4V8h4"/></svg>',
+tree:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 7 9h3l-4 6h5v5h2v-5h5l-4-6h3z"/></svg>',
+shears:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><path d="M8 7 20 18M8 17 20 6"/></svg>',
+vent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 12c0-3 2-4 4-4M12 12c3 0 4 2 4 4M12 12c0 3-2 4-4 4M12 12c-3 0-4-2-4-4"/></svg>',
+hammer:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l7-7"/><path d="M12 12 9 9l4-4 3 3z"/><path d="M13 5l3-3 4 4-3 3z"/></svg>',
+floor:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M3 10h18M3 14h18M9 6v4M15 10v4M12 14v4"/></svg>',
+heatfloor:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="6" rx="1"/><path d="M3 16h18"/><path d="M7 10c0-2-2-2-2-4M12 10c0-2-2-2-2-4M17 10c0-2-2-2-2-4"/></svg>',
+drop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6 6 10a6 6 0 0 1-12 0c0-4 6-10 6-10z"/></svg>',
+heatpump:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="9" rx="1.5"/><circle cx="9" cy="10.5" r="2.4"/><path d="M14 9h4M14 12h4"/></svg>',
+sauna:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14V5a2 2 0 0 1 4 0v9a4 4 0 1 1-4 0z"/><path d="M5 6c-.5-1 .5-1.5 0-2.5M19 6c-.5-1 .5-1.5 0-2.5"/></svg>',
+solar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="9" rx="1"/><path d="M3 14h18M9 10v9M15 10v9"/><path d="M12 3v3M7.5 5l1.3 1.3M16.5 5l-1.3 1.3"/></svg>',
+awning:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v4l-3 5H6L3 9z"/><path d="M6 14v4M12 14v4M18 14v4"/></svg>'
+};
+function catName(c){return LANG==='pl'?c[1]:c[0]}
+function groupName(g){return GROUPS[g]?GROUPS[g][LANG==='pl'?1:0]:g}
 
 function renderCats(list){
   grid.innerHTML=list.length?list.map(c=>{
     const i=CATS.indexOf(c);
-    return `<div class="cat" onclick="pickCat(${i})"><div class="ico">${c[2]}</div><div class="t">${catName(c)}<small>${groupName(c[3])}</small></div></div>`;
-  }).join(''):`<div class="cat-empty">${LANG==='nl'?'Geen resultaten. Probeer een ander zoekwoord.':'Brak wyników. Spróbuj innego słowa kluczowego.'}</div>`;
+    return `<div class="cat" onclick="pickCat(${i})"><div class="ico">${ICONS[c[2]]||''}</div><div class="t">${catName(c)}<small>${groupName(c[3])}</small></div></div>`;
+  }).join(''):`<div class="cat-empty">${LANG==='pl'?'Brak wyników. Spróbuj innego słowa kluczowego.':'No results. Try another keyword.'}</div>`;
 }
 function filterCats(q){
   q=q.trim().toLowerCase();
@@ -709,7 +798,7 @@ function quoteSubmit(e){e.preventDefault();const f=e.target;
   const url=(__me&&__me.role==='customer')?'/api/requests':'/api/quote';
   fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});
   document.getElementById('qNote').classList.add('show');
-  f.querySelector('button').textContent=LANG==='nl'?'Verzonden ✓':'Wysłano ✓';return false;}
+  f.querySelector('button').textContent=LANG==='pl'?'Wysłano ✓':'Sent ✓';return false;}
 function proSubmit(e){e.preventDefault();const f=e.target;
   const sel=document.getElementById('proCat');
   openAuth('register',{role:'pro',company:f.company.value,spec:sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:'',city:f.city.value,email:f.email.value});
@@ -731,8 +820,8 @@ function applyLang(){
 function setLang(l){
   LANG=l;
   document.cookie='bm_lang='+l+'; Path=/; Max-Age='+(365*86400)+'; SameSite=Lax';
-  document.getElementById('lnNL').classList.toggle('on',l==='nl');
   document.getElementById('lnPL').classList.toggle('on',l==='pl');
+  document.getElementById('lnEN').classList.toggle('on',l==='en');
   applyLang();
 }
 
@@ -823,7 +912,7 @@ function applyAuthTexts(){
   document.getElementById('fName').style.display=reg?'block':'none';
   document.getElementById('proFields').style.display=(reg&&authRole==='pro')?'block':'none';
   const s=document.getElementById('aSpec');
-  if(s)s.innerHTML=CATS.map(c=>`<option>${LANG==='nl'?c[0]:c[1]}</option>`).join('');
+  if(s)s.innerHTML=CATS.map(c=>`<option>${LANG==='pl'?c[1]:c[0]}</option>`).join('');
 }
 async function submitAuth(){
   const err=document.getElementById('authErr');err.classList.remove('show');

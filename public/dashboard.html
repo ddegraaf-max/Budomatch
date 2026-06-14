@@ -88,7 +88,7 @@ label{font-size:.84rem;color:var(--muted);font-weight:600;display:block;margin-b
   <a href="/" class="logo"><svg viewBox="0 0 48 48"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2DC8C"/><stop offset=".55" stop-color="#D4AF37"/><stop offset="1" stop-color="#A87D1B"/></linearGradient></defs><circle cx="24" cy="24" r="22" fill="none" stroke="url(#g)" stroke-width="1.6" opacity=".55"/><path d="M24 9 L39 24 L33 24 L24 15 L15 24 L9 24 Z" fill="url(#g)"/><path d="M24 19.5 l5 4.5 -5 4.5 -5 -4.5 Z" fill="url(#g)"/><rect x="14" y="32.5" width="20" height="3.4" rx="1.7" fill="url(#g)"/></svg><span class="word">Budomatch</span></a>
   <span class="sp"></span>
   <span class="pill" id="who"></span>
-  <div class="switcher"><button id="lnNL" onclick="setLang('nl')">NL</button><button id="lnPL" onclick="setLang('pl')">PL</button></div>
+  <div class="switcher"><button id="lnPL" onclick="setLang('pl')">PL</button><button id="lnEN" onclick="setLang('en')">EN</button></div>
   <a href="/" class="btn btn-ghost btn-sm" id="toSite"></a>
   <button class="btn btn-ghost btn-sm" id="btnLogout" onclick="logout()"></button>
 </div></header>
@@ -100,36 +100,36 @@ label{font-size:.84rem;color:var(--muted);font-weight:600;display:block;margin-b
 <script>
 const $ = s => document.querySelector(s);
 const money = n => Number(n).toFixed(2).replace('.', ',') + ' zł';
-let LANG=(document.cookie.match(/(?:^|; )bm_lang=(nl|pl)/)||[])[1]||'pl';
-const fmtDate = ms => new Date(ms).toLocaleDateString(LANG==='nl'?'nl-NL':'pl-PL', { day:'numeric', month:'short', year:'numeric' });
+let LANG=(document.cookie.match(/(?:^|; )bm_lang=(pl|en)/)||[])[1]||'pl';
+const fmtDate = ms => new Date(ms).toLocaleDateString(LANG==='pl'?'pl-PL':'en-GB', { day:'numeric', month:'short', year:'numeric' });
 let ME = null;
 
 const SELLER = { name:'Budomatch DANIËL DE GRAAF', addr:'15, 09-550 Białka, Polska', nip:'7010869430', regon:'381430120', email:'kontakt@budomatch.pl' };
 
 const T = {
-  nl: {
-    toSite:'Naar site', logout:'Uitloggen', loading:'Laden…',
-    roleCust:'Klant', rolePro:'Vakman',
-    cWelcome:'Welkom', cIntro:'Plaats gratis een aanvraag — vakmensen sturen je vrijblijvend offertes.',
-    cNew:'Nieuwe aanvraag plaatsen', cService:'Dienst', cZip:'Plaats / postcode', cZipPh:'bijv. 00-001 Warschau',
-    cPhone:'Telefoon (zien vakmensen pas na ontgrendeling)', cPhonePh:'+48 600 000 000',
-    cDesc:'Omschrijving van de klus', cDescPh:'Beschrijf wat er moet gebeuren, omvang, gewenste termijn…',
-    cPost:'Gratis plaatsen', cNote:'Je aanvraag staat live. Vakmensen kunnen nu reageren.',
-    aiTitle:'AI-assistent', aiIntro:'Laat me je helpen de klus scherp te omschrijven.',
-    aiGreet:'Hoi! Vertel kort wat je wilt laten doen, dan help ik je tot een heldere klusomschrijving te komen. Bijvoorbeeld: "badkamer renoveren" of "zonnepanelen op schuin dak".',
-    aiPh:'Typ hier…', aiUse:'Gebruik als omschrijving ↓', aiErr:'Sorry, er ging iets mis.',
-    myReq:'Mijn aanvragen', myEmpty:'Je hebt nog geen aanvragen geplaatst.', reaction:'reactie', reactions:'reacties',
-    pWelcome:'Welkom', pIntro:'Beschikbare aanvragen bij jou in de buurt. Ontgrendel een lead om de contactgegevens te zien.',
-    kFree:'gratis aanvragen over', kUsed:'ontgrendeld totaal', kPrice:'per lead na 10 gratis (incl. 23% btw)',
-    leads:'Beschikbare leads', leadsEmpty:'Er staan nog geen open aanvragen.',
-    match:'past bij jou', unlocked:'ontgrendeld',
-    freeUnlock:'Gratis ontgrendelen', unlock:'Ontgrendelen', incl:'incl. btw', over:'over',
-    busy:'Bezig…', redirect:'Doorsturen naar betaling…', retry:'Opnieuw proberen',
-    billing:'Facturatie', bFree:'gratis over', bPaid:'betaald totaal (incl. btw)', bNone:'Nog geen ontgrendelingen.',
-    free:'gratis', exclVat:'excl. {net} + 23% btw {vat}', receipt:'Factuur',
-    paidOk:'Betaling gelukt — de lead wordt ontgrendeld.', payCancel:'Betaling geannuleerd.',
-    rcTitle:'Betaalbewijs', rcSeller:'Verkoper', rcBuyer:'Koper', rcDesc:'Omschrijving', rcLead:'Ontgrendeling lead',
-    rcNet:'Netto', rcVat:'Btw (23%)', rcGross:'Totaal (incl. btw)', rcDate:'Datum', rcPrint:'Afdrukken / opslaan als PDF', rcNip:'NIP',
+  en: {
+    toSite:'Site', logout:'Log out', loading:'Loading…',
+    roleCust:'Customer', rolePro:'Tradesman',
+    cWelcome:'Welcome', cIntro:'Post a job for free — tradesmen will send you no-obligation quotes.',
+    cNew:'Post a new job', cService:'Service', cZip:'City / postcode', cZipPh:'e.g. 00-001 Warsaw',
+    cPhone:'Phone (tradesmen see it only after unlocking)', cPhonePh:'+48 600 000 000',
+    cDesc:'Job description', cDescPh:'Describe what needs doing, scope, desired timing…',
+    cPost:'Post for free', cNote:'Your job is live. Tradesmen can now respond.',
+    aiTitle:'AI assistant', aiIntro:'Let me help you describe the job clearly.',
+    aiGreet:'Hi! Tell me briefly what you want done and I will help you write a clear job description. For example: "bathroom renovation" or "solar panels on a pitched roof".',
+    aiPh:'Type here…', aiUse:'Use as description ↓', aiErr:'Sorry, something went wrong.',
+    myReq:'My jobs', myEmpty:'You have not posted any jobs yet.', reaction:'response', reactions:'responses',
+    pWelcome:'Welcome', pIntro:'Available jobs near you. Unlock a lead to see the contact details.',
+    kFree:'free jobs left', kUsed:'unlocked total', kPrice:'per lead after 10 free (incl. 23% VAT)',
+    leads:'Available leads', leadsEmpty:'There are no open jobs yet.',
+    match:'matches you', unlocked:'unlocked',
+    freeUnlock:'Unlock for free', unlock:'Unlock', incl:'incl. VAT', over:'left',
+    busy:'Working…', redirect:'Redirecting to payment…', retry:'Try again',
+    billing:'Billing', bFree:'free left', bPaid:'paid total (incl. VAT)', bNone:'No unlocks yet.',
+    free:'free', exclVat:'net {net} + 23% VAT {vat}', receipt:'Invoice',
+    paidOk:'Payment successful — the lead will be unlocked.', payCancel:'Payment cancelled.',
+    rcTitle:'Payment confirmation', rcSeller:'Seller', rcBuyer:'Buyer', rcDesc:'Description', rcLead:'Lead unlock',
+    rcNet:'Net', rcVat:'VAT (23%)', rcGross:'Total (incl. VAT)', rcDate:'Date', rcPrint:'Print / save as PDF', rcNip:'NIP',
   },
   pl: {
     toSite:'Strona główna', logout:'Wyloguj', loading:'Ładowanie…',
@@ -160,7 +160,7 @@ const t = k => (T[LANG][k]!=null?T[LANG][k]:k);
 function setLang(l){
   LANG=l;
   document.cookie='bm_lang='+l+'; Path=/; Max-Age='+(365*86400)+'; SameSite=Lax';
-  $('#lnNL').classList.toggle('on',l==='nl'); $('#lnPL').classList.toggle('on',l==='pl');
+  $('#lnPL').classList.toggle('on',l==='pl'); $('#lnEN').classList.toggle('on',l==='en');
   if(ME){ applyChrome(); ME.role==='pro'?renderPro():renderCustomer(); }
 }
 function applyChrome(){
@@ -176,16 +176,16 @@ async function api(url, opt={}){
 async function logout(){ await fetch('/api/logout',{method:'POST'}); location.href='/'; }
 
 (async function init(){
-  $('#lnNL').classList.toggle('on',LANG==='nl'); $('#lnPL').classList.toggle('on',LANG==='pl');
+  $('#lnPL').classList.toggle('on',LANG==='pl'); $('#lnEN').classList.toggle('on',LANG==='en');
   try { ME = (await api('/api/me')).user; } catch { return; }
   applyChrome();
   $('#loading').remove();
   ME.role==='pro' ? renderPro() : renderCustomer();
 })();
 
-const CATS_NL = "Aanbouw,Airco,Architect,Asbest verwijderen,Badkamerspecialist,Bestraten,Cv-ketel,Dakbedekking,Dakkapel,Dakraam,Elektricien,Garagedeur,Gevelreiniging,Glas,Hekwerken,Inbraakbeveiliging,Isolatie,Keukenspecialist,Kozijnen,Laadpalen,Loodgieter,Ongediertebestrijding,Rolluiken,Schilderwerk,Schuifpui,Serre,Stucwerk,Tegels zetten,Thuisbatterij,Trap,Tuinaanleg,Tuinonderhoud,Ventilatie,Verbouwing,Vloeren,Vloerverwarming,Vochtbestrijding,Warmtepomp,Wellness,Zonnepanelen,Zonwering".split(',');
+const CATS_EN = "Extension,Air conditioning,Architect,Asbestos removal,Bathroom,Paving,Boiler (CH),Roofing,Dormer,Roof window,Electrician,Garage door,Facade cleaning,Glazing,Fencing,Burglary protection,Insulation,Kitchen,Window frames,EV charging,Plumber,Pest control,Roller shutters,Painting,Sliding doors,Conservatory,Plastering,Tiling,Home battery,Stairs,Landscaping,Garden maintenance,Ventilation,Renovation,Flooring,Underfloor heating,Damp proofing,Heat pump,Wellness & sauna,Solar panels,Awnings & sun protection".split(',');
 const CATS_PL = "Dobudówka,Klimatyzacja,Architekt,Usuwanie azbestu,Łazienki,Brukarstwo,Piec/kocioł CO,Pokrycia dachowe,Lukarna,Okno dachowe,Elektryk,Bramy garażowe,Czyszczenie elewacji,Szklenie,Ogrodzenia,Zabezpieczenia antywłamaniowe,Izolacja,Kuchnie,Stolarka okienna,Stacje ładowania,Hydraulik,Dezynsekcja,Rolety,Malowanie,Drzwi przesuwne HS,Ogród zimowy,Tynkowanie,Układanie płytek,Magazyn energii,Schody,Zakładanie ogrodów,Pielęgnacja ogrodów,Wentylacja,Remont,Podłogi,Ogrzewanie podłogowe,Osuszanie/wilgoć,Pompa ciepła,Wellness/sauny,Fotowoltaika,Markizy/osłony".split(',');
-const cats = () => LANG==='nl'?CATS_NL:CATS_PL;
+const cats = () => LANG==='pl'?CATS_PL:CATS_EN;
 
 /* ============ KLANT / KLIENT ============ */
 function renderCustomer(){
